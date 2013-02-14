@@ -229,6 +229,17 @@ someBtn.onclick = function () {
 }
 ```
 
+### getSelection()
+
+Grabs current selection from the editor document. It returns native Selection object specified by the HTML Editing API.
+
+```javascript
+var selection = editor.getSelection();
+if (selection.rangeCount > 0) {
+  console.log(editor.getRangeAt(0).toString()); // Prints selected text
+}
+```
+
 ### is(_state_)
 
 Returns a boolean for the requested state. Useful when you need to know if the editor is loaded yet for example. Below is a list of supported states:

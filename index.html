@@ -224,6 +224,14 @@ var editor = new EpicEditor(opts);</code></pre>
 <pre><code class="lang-javascript">someBtn.onclick = function () {
   console.log(editor.getElement(&#39;editor&#39;).body.innerHTML); // Returns the editor&#39;s content
 }</code></pre>
+<h3>getSelection()</h3>
+<p>Grabs current selection from the editor document. It returns native Selection object specified by the HTML Editing API.
+
+</p>
+<pre><code class="lang-javascript">var selection = editor.getSelection();
+if (selection.rangeCount &gt; 0) {
+  console.log(editor.getRangeAt(0).toString()); // Prints selected text
+}</code></pre>
 <h3>is(<em>state</em>)</h3>
 <p>Returns a boolean for the requested state. Useful when you need to know if the editor is loaded yet for example. Below is a list of supported states:
 
