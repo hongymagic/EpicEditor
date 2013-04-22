@@ -33,10 +33,11 @@ namespace('lint', function () {
     , hint = 'node node_modules/jshint/bin/hint '
     , jshintrc = '.jshintrc'
     , editor = 'src/editor.js'
+    , selection = 'src/selection.js'
     , tests = 'test'
     , docs = 'docs/js/main.js'
 
-  task('all', ['lint:editor', 'lint:docs', 'lint:tests', 'lint:util'], function () {
+  task('all', ['lint:editor', 'lint:selection', 'lint:docs', 'lint:tests', 'lint:util'], function () {
     complete()
   }, {async: true})
 
@@ -44,6 +45,18 @@ namespace('lint', function () {
   task('editor', [], function () {
     console.log(colorize('--> Linting editor', 'yellow'))
     var files = [ editor ]
+      , cmds = [hint + files.join(' ') + ' --config .jshintrc']
+
+    jake.exec(cmds, function () {
+      console.log(colorize('  √ ok', 'green'))
+      complete()
+    }, {stdout: true})
+  }, {async: true})
+
+  desc('Lint module EpicEditor#selection: src/selection.js')
+  task('editor', [], function () {
+    console.log(colorize('--> Linting selection', 'yellow'))
+    var files = [ selection ]
       , cmds = [hint + files.join(' ') + ' --config .jshintrc']
 
     jake.exec(cmds, function () {
@@ -97,6 +110,7 @@ task('build', ['lint:editor'], function () {
     , parser = process.env.parser ? process.env.parser : 'node_modules/marked/lib/marked.js'
     , srcPaths =
       [ srcDir + 'editor.js'
+      , srcDir + 'selection.js'
       , parser
       ]
     , destPath = destDir + 'epiceditor.js'
